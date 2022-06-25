@@ -101,9 +101,16 @@ message UploadLoc {
   }
 }
 
+enum ChunkStoreClientType {
+  CHUNKSTORE_CLIENT_TYPE_UNSPECIFIED = 0;
+  CHUNKSTORE_CLIENT_TYPE_INTERNAL = 1;
+  CHUNKSTORE_CLIENT_TYPE_EXTERNAL = 2;
+}
+
 message GetDownloadLocsRequest {
   RepoId repo_id = 1;
   repeated bytes chunk_hashes = 2;
+  ChunkStoreClientType clientType = 3;
 }
 
 message GetDownloadLocsResponse {
@@ -120,6 +127,7 @@ message GetUploadLocsRequest {
   RepoId repo_id = 1;
   repeated bytes table_file_hashes = 2 [deprecated = true];
   repeated TableFileDetails table_file_details = 3;
+  ChunkStoreClientType clientType = 4;
 }
 
 message GetUploadLocsResponse {
